@@ -83,6 +83,7 @@ class TodoPageState extends State<TodoPage> {
 
   void _showAddTaskDialog() {
     String newTask = '';
+    DateTime? reminderTime;
 
     showDialog(
       context: context,
@@ -98,6 +99,28 @@ class TodoPageState extends State<TodoPage> {
             ),
           ),
           actions: [
+          SizedBox(height: 20),
+          ElevatedButton(
+            onPressed: () async {
+              final selectedTime = await showDatePicker(
+                context: context,
+                initialDate: DateTime.now(),
+                firstDate: DateTime.now(),
+                lastDate: DateTime.now().add(const Duration(days: 365)),
+              );
+              if (selectedTime != null) {
+                final now = DateTime.now();
+                reminderTime = DateTime(
+                  selectedTime.year,
+                  selectedTime.month,
+                  selectedTime.day,
+                  now.hour,
+                  now.minute,
+                );
+              }
+            },
+            child: const Text('Pilih Waktu Pengingat'),
+          ),
             TextButton(
               onPressed: () => Navigator.pop(context),
               child: const Text('Batal'),
@@ -107,6 +130,13 @@ class TodoPageState extends State<TodoPage> {
                 if (newTask.isNotEmpty) {
                   setState(() {
                     _service.addTodo(newTask);
+                    if (reminderTime != null) {
+                      _service.scheduleNotification(
+                        _service.todos.length - 1,
+                        newTask,
+                        reminderTime!,
+                      );
+                    }
                   });
                   Navigator.pop(context);
                 }
@@ -123,6 +153,7 @@ class TodoPageState extends State<TodoPage> {
     String updatedTask = _service.todos[index].title;
     TextEditingController controller =
         TextEditingController(text: updatedTask);
+    DateTime? newTime;
 
     showDialog(
       context: context,
@@ -138,6 +169,28 @@ class TodoPageState extends State<TodoPage> {
             ),
           ),
           actions: [
+          SizedBox(height: 20),
+          ElevatedButton(
+            onPressed: () async {
+              final selectedTime = await showDatePicker(
+                context: context,
+                initialDate: DateTime.now(),
+                firstDate: DateTime.now(),
+                lastDate: DateTime.now().add(const Duration(days: 365)),
+              );
+              if (selectedTime != null) {
+                final now = DateTime.now();
+                newTime = DateTime(
+                  selectedTime.year,
+                  selectedTime.month,
+                  selectedTime.day,
+                  now.hour,
+                  now.minute,
+                );
+              }
+            },
+            child: const Text('Pilih Waktu Pengingat'),
+          ),
             TextButton(
               onPressed: () => Navigator.pop(context),
               child: const Text('Batal'),
@@ -147,6 +200,13 @@ class TodoPageState extends State<TodoPage> {
                 if (updatedTask.isNotEmpty) {
                   setState(() {
                     _service.updateTodo(index, updatedTask);
+                    if (newTime != null) {
+                      _service.scheduleNotification(
+                        index,
+                        updatedTask,
+                        newTime!,
+                      );
+                    }
                   });
                   Navigator.pop(context);
                 }
