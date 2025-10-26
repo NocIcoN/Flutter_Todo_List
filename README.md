@@ -51,7 +51,7 @@ lib/
 
 - Filter tugas (semua / selesai / belum selesai)
 - Reorder tugas dengan drag & drop
-- Notifikasi pengingat
+- Notifikasi pengingat ✅
 - Animasi transisi list
 - Penyimpanan data menggunakan database (Hive / SQLite)
 - Mode gelap (Dark Mode)
