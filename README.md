@@ -1,16 +1,57 @@
-# todo_list
+# ✅ ToDo List App
 
-A new Flutter project.
+Aplikasi ToDo List sederhana yang dibangun menggunakan Flutter sebagai proyek pembelajaran manajemen state dasar, CRUD, serta penyimpanan data lokal di perangkat.
 
-## Getting Started
+## ✨ Fitur Utama
 
-This project is a starting point for a Flutter application.
+- Tambah tugas baru
+- Edit nama tugas
+- Hapus tugas (swipe to delete)
+- Tandai tugas sebagai selesai atau belum selesai
+- Data tersimpan di memori lokal menggunakan SharedPreferences
+- Tampilan UI sederhana dan user friendly
 
-A few resources to get you started if this is your first Flutter project:
+## 🛠️ Teknologi dan Package
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+| Komponen | Teknologi |
+|---------|-----------|
+| Framework | Flutter |
+| Bahasa | Dart |
+| Local Storage | SharedPreferences |
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 📂 Struktur Folder
+```
+lib/
+├─ models/
+│ └─ todo.dart
+├─ services/
+│ └─ todo_service.dart
+├─ screens/
+│ └─ todo_page.dart
+└─ main.dart
+```
+
+
+## 🚀 Cara Menjalankan
+
+1. Clone repository
+   ```sh
+   git clone <repository-url>
+2. Masuk ke direktori proyek
+   ```sh
+   cd todo_list
+3. Install dependencies
+   ```sh
+   flutter pub get
+4. Jalankan aplikasi di emulator atau device fisik
+   ```sh
+   flutter run
+
+## 📌 Rencana Pengembangan (Next Update)
+
+- Filter tugas (semua / selesai / belum selesai)
+- Reorder tugas dengan drag & drop
+- Notifikasi pengingat
+- Animasi transisi list
+- Penyimpanan data menggunakan database (Hive / SQLite)
+- Mode gelap (Dark Mode)
